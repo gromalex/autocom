@@ -5,12 +5,14 @@ export default class AutoCom {
     const {
       selector = '#autocom-field',
       data = {},
-      characters = 2
+      characters = 2,
+      clearButton = false,
     } = config;
 
     this.selector = selector;
     this.data = data;
     this.characters = characters;
+    this.clearButton = clearButton;
     this.arrayMatches = [];
     this.input = autoComView.getInput(this.selector);
     this.list = autoComView.createList(this.input);
@@ -48,7 +50,7 @@ export default class AutoCom {
   }
 
   init() {
-    autoComView.createMain(this.input, this.list);
+    autoComView.createMain(this.input, this.list, this.clearButton);
 
     this.input.addEventListener('input', this.handleInput.bind(this));
   }

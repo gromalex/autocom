@@ -4,6 +4,7 @@ const classes = {
   listItem: 'options__item',
   listItemEmpty: 'options__item_empty',
   listItemSelected: 'options__item_selected',
+  clearButton: 'autocom__clear-button'
 }
 
 const dataAttributes = {
@@ -19,7 +20,7 @@ const keys = {
 
 const getInput = selector => document.querySelector(selector);
 
-const createMain = (input, list) => {
+const createMain = (input, list, clearButton) => {
   const mainNode = document.createElement('div');
   mainNode.classList.add(classes.main);
 
@@ -27,7 +28,22 @@ const createMain = (input, list) => {
 
   mainNode.append(input);
   mainNode.append(list);
+
+  if (clearButton) {
+    const clearButton = createClearButton(input, list);
+    mainNode.append(clearButton);
+  }
 };
+
+const createClearButton = (input, list) => {
+  const clearButton = document.createElement('button');
+  clearButton.classList.add(classes.clearButton);
+  clearButton.innerText = '✖';
+
+  clearButton.addEventListener('click', (event) => handleClickClearButton(event, input, list));
+
+  return clearButton;
+}
 
 const createList = (input) => {
   let listNode = document.createElement('ul');
@@ -75,6 +91,14 @@ const clearList = (listNode) => listNode.innerHTML = '';
 const onSelection = (event, input, list, value) => {
   input.value = value;
   list.innerHTML = '';
+};
+
+const handleClickClearButton = (event, input, list) => {
+  event.preventDefault();
+
+  input.value = '';
+  input.focus();
+  clearList(list);
 };
 
 const handleClickOptions = (event, input) => {
