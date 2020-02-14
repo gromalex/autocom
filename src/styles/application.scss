@@ -1,0 +1,56 @@
+@import "~bulma";
+
+html {
+  font-size: 24px;
+}
+
+body {
+  padding: 1rem;
+}
+
+.autocom-field {
+  width: 400px;
+  &:focus {
+    & + .options {
+      display: block;
+    }
+  }
+}
+
+.autocom {
+  position: relative;
+  display: inline-block;
+}
+
+.options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+
+  display: none;
+  max-height: 200px;
+
+  border: 1px solid silver;
+  border-radius: 4px;
+
+  overflow-y: auto;
+
+  &:hover {
+    display: block;
+  }
+
+  &__item {
+    padding: 2px 8px;
+    cursor: pointer;
+
+    &:hover, &_selected {
+      background: silver;
+    }
+
+    &_empty {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+  }
+}
