@@ -7,10 +7,14 @@ export default class AutoCom {
       data = {},
       characters = 2,
       clearButton = false,
+      propertySearch,
+      propertyValue
     } = config;
 
     this.selector = selector;
     this.data = data;
+    this.propertySearch = propertySearch;
+    this.propertyValue = propertyValue;
     this.characters = characters;
     this.clearButton = clearButton;
     this.arrayMatches = [];
@@ -20,18 +24,13 @@ export default class AutoCom {
     this.init()
   }
 
-  searchMatches(string) {
+  searchMatches(query) {
     this.arrayMatches = [];
-
-    // for (let key in this.data) {
-    //   if (this.data[key].toLowerCase().indexOf(string.toLowerCase()) >= 0) {
-    //     this.arrayMatches.push({value: key, content: this.data[key]});
-    //   }
-    // }
+    const pattern = new RegExp(`${query}`, "gi");
 
     this.data.forEach(item => {
-      if (item.name.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
-        this.arrayMatches.push({value: item.city_id, content: item.name});
+      if (item[this.propertySearch].search(pattern) === 0) {
+        this.arrayMatches.push({value: item[this.propertyValue], content: item[this.propertySearch]});
       }
     })
   }

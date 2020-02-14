@@ -27,18 +27,18 @@ const createMain = (input, list, clearButton) => {
   input.after(mainNode);
 
   mainNode.append(input);
-  mainNode.append(list);
 
   if (clearButton) {
     const clearButton = createClearButton(input, list);
     mainNode.append(clearButton);
   }
+
+  mainNode.append(list);
 };
 
 const createClearButton = (input, list) => {
   const clearButton = document.createElement('button');
   clearButton.classList.add(classes.clearButton);
-  clearButton.innerText = '✖';
 
   clearButton.addEventListener('click', (event) => handleClickClearButton(event, input, list));
 
@@ -66,12 +66,12 @@ const createLi = (value, content, index) => {
   return liNode;
 };
 
-const addListItemToList = (dataSrc, listNode) => {
+const addListItemToList = (data, listNode) => {
   const fragment = document.createDocumentFragment();
   clearList(listNode);
 
-  if (dataSrc.length) {
-    dataSrc.forEach((item, index) => {
+  if (data.length) {
+    data.forEach((item, index) => {
       const liNode = createLi(item.value, item.content, index);
 
       fragment.append(liNode);
@@ -87,25 +87,6 @@ const addListItemToList = (dataSrc, listNode) => {
 };
 
 const clearList = (listNode) => listNode.innerHTML = '';
-
-const onSelection = (event, input, list, value) => {
-  input.value = value;
-  list.innerHTML = '';
-};
-
-const handleClickClearButton = (event, input, list) => {
-  event.preventDefault();
-
-  input.value = '';
-  input.focus();
-  clearList(list);
-};
-
-const handleClickOptions = (event, input) => {
-  if (event.target.classList.contains(classes.listItem)) {
-    onSelection(event, input, event.currentTarget, event.target.innerText)
-  }
-};
 
 const navigation = (input, list) => {
   // Locals
@@ -164,6 +145,25 @@ const navigation = (input, list) => {
       }
     }
   };
+};
+
+const onSelection = (event, input, list, value) => {
+  input.value = value;
+  list.innerHTML = '';
+};
+
+const handleClickClearButton = (event, input, list) => {
+  event.preventDefault();
+
+  input.value = '';
+  input.focus();
+  clearList(list);
+};
+
+const handleClickOptions = (event, input) => {
+  if (event.target.classList.contains(classes.listItem)) {
+    onSelection(event, input, event.currentTarget, event.target.innerText)
+  }
 };
 
 export const autoComView = {
