@@ -5,7 +5,7 @@ const classes = {
   listItemEmpty: 'options__item_empty',
   listItemSelected: 'options__item_selected',
   clearButton: 'autocom__clear-button'
-}
+};
 
 const dataAttributes = {
   value: 'data-value',
@@ -23,23 +23,18 @@ const getInput = selector => document.querySelector(selector);
 const createMain = (input, list, clearButton) => {
   const mainNode = document.createElement('div');
   mainNode.classList.add(classes.main);
-
   input.after(mainNode);
-
   mainNode.append(input);
-
   if (clearButton) {
     const clearButton = createClearButton(input, list);
     mainNode.append(clearButton);
   }
-
   mainNode.append(list);
 };
 
 const createClearButton = (input, list) => {
   const clearButton = document.createElement('button');
   clearButton.classList.add(classes.clearButton);
-
   clearButton.addEventListener('click', (event) => handleClickClearButton(event, input, list));
 
   return clearButton;
@@ -48,7 +43,6 @@ const createClearButton = (input, list) => {
 const createList = (input) => {
   let listNode = document.createElement('ul');
   listNode.classList.add(classes.list);
-
   listNode.addEventListener('click', (event) => {
     handleClickOptions(event, input)
   });
@@ -79,10 +73,8 @@ const addListItemToList = (data, listNode) => {
   } else {
     const liNode = createLi('', 'Ничего не найдено', 0);
     liNode.classList.add(classes.listItemEmpty);
-
     fragment.append(liNode);
   }
-
   listNode.append(fragment);
 };
 

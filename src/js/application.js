@@ -1,7 +1,6 @@
-import AutoCom from "./autocom";
+import AutoCom from './autocom';
 
-const url = "https://raw.githubusercontent.com/aZolo77/citiesBase/master/cities.json";
-
+const url = 'https://raw.githubusercontent.com/aZolo77/citiesBase/master/cities.json';
 
 fetch(url)
   .then(response => response.json())
@@ -15,11 +14,3 @@ fetch(url)
       propertyValue: 'city_id'
     });
   });
-
-
-
-
-
-
-
-

@@ -1,4 +1,4 @@
-import { autoComView } from "./autocom-view";
+import {autoComView} from './autocom-view';
 
 export default class AutoCom {
   constructor(config) {
@@ -26,7 +26,7 @@ export default class AutoCom {
 
   searchMatches(query) {
     this.arrayMatches = [];
-    const pattern = new RegExp(`${query}`, "gi");
+    const pattern = new RegExp(`${query}`, 'gi');
 
     this.data.forEach(item => {
       if (item[this.propertySearch].search(pattern) === 0) {
@@ -50,7 +50,6 @@ export default class AutoCom {
 
   init() {
     autoComView.createMain(this.input, this.list, this.clearButton);
-
     this.input.addEventListener('input', this.handleInput.bind(this));
   }
 }
